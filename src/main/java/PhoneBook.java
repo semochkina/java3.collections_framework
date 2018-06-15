@@ -6,7 +6,7 @@ import java.util.Map;
 //9. *Напишите класс PhoneBook (телефонная книга).
 public class PhoneBook {
     // Книга представляет собой отображение человека в список его номеров телефонов (номер телефона — строка).
-    Map<Human, List<String>> map = new HashMap<>();
+    private Map<Human, List<String>> map = new HashMap<>();
 
     // добавить телефон
     public void addPhone(Human human, String phone) {

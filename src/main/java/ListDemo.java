@@ -48,15 +48,12 @@ public class ListDemo {
     //4.
     // Вход: список множеств целых чисел и еще одно множество.
     // Выход: список всех множеств входного списка, которые не пересекаются с заданным множеством.
-    public List<int[]> notIntersect(List<int[]> list, int[] array) {
-        List<int[]> result = new ArrayList<>();
+    public List<Set<Integer>> notIntersect(List<Set<Integer>> list, Set<Integer> set) {
+        List<Set<Integer>> result = new ArrayList<>();
         // делаем из заданного множества HashSet для удобства сравнения
-        Set<Integer> set = new HashSet<>();
-        for (int value: array) {
-            set.add(value);
-        }
-        for (int[] ints: list) {
+        for (Set<Integer> ints: list) {
             // проверяем пересекаются ли множества
+//            Collections.disjoint()
             boolean intersect = false;
             for (int value: ints) {
                 if (set.contains(value)) {
@@ -92,7 +89,7 @@ public class ListDemo {
         return result;
     }
 
-    private List<Human> getHumans(Map<Integer, Human> map, int[] array, int age) {
+    private List<Human> getHumans(Map<Integer, Human> map, Set<Integer> array, int age) {
         List<Human> result = new ArrayList<>();
         for (int value: array) {
             final Human human = map.get(value);
