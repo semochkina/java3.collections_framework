@@ -13,7 +13,11 @@ public class Data {
     //Data data = new Data(“Test data”, new Group(...), new Group(...));
     public Data(String name, Group... groups) {
         this.name = name;
-        this.groups = groups;  // fixme
+//        this.groups = groups;  // fixme
+        this.groups = new Group[groups.length];
+        for (int i = 0; i < groups.length; i++) {
+            this.groups[i] = groups[i];
+        }
     }
 
     public String getName() {
@@ -29,7 +33,11 @@ public class Data {
     }
 
     public void setGroups(Group[] groups) {
-        this.groups = groups; // fixme
+//        this.groups = groups; // fixme
+        this.groups = new Group[groups.length];
+        for (int i = 0; i < groups.length; i++) {
+            this.groups[i] = groups[i];
+        }
     }
 
 
@@ -43,7 +51,7 @@ public class Data {
     public Iterator<Integer> iterator0() {
         List<Integer> collection = new ArrayList<>();
         for (Group group : getGroups()) {
-            for (int i :group.getArray()) {
+            for (int i : group.getArray()) {
                 collection.add(i);
             }
         }

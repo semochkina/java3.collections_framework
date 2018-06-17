@@ -9,7 +9,6 @@ public class Group {
     // Group group = new Group(100, 1, 2, 3); // 100 – номер группы
     public Group(int id, Integer... array) {
         this.id = id;
-        final Integer[] array1 = array;
         this.array = new int[array.length];
         for (int i = 0; i <array.length; i++) {
             this.array[i] = array[i];

@@ -53,15 +53,7 @@ public class ListDemo {
         // делаем из заданного множества HashSet для удобства сравнения
         for (Set<Integer> ints: list) {
             // проверяем пересекаются ли множества
-//            Collections.disjoint()
-            boolean intersect = false;
-            for (int value: ints) {
-                if (set.contains(value)) {
-                    intersect = true;
-                    break;
-                }
-            }
-            if (!intersect) {
+            if (Collections.disjoint(ints, set)) {
                 // не пересекаются
                 result.add(ints);
             }
@@ -89,29 +81,32 @@ public class ListDemo {
         return result;
     }
 
-    private List<Human> getHumans(Map<Integer, Human> map, Set<Integer> array, int age) {
+    //7.
+    // Имеется набор людей, каждому человеку задан уникальный целочисленный идентификатор.
+    // Напишите метод, который получает на вход отображение (Map)
+    // целочисленных идентификаторов в объекты типа Human и множество целых чисел.
+    // Результат — множество людей, идентификаторы которых содержатся во входном множестве.
+    public List<Human> getHumans(Map<Integer, Human> map, Set<Integer> array) {
         List<Human> result = new ArrayList<>();
         for (int value: array) {
             final Human human = map.get(value);
-            if (human != null && human.getAge() >= age) {
+            if (human != null) {
                 result.add(human);
             }
         }
         return result;
     }
 
-    //7.
-    // Имеется набор людей, каждому человеку задан уникальный целочисленный идентификатор.
-    // Напишите метод, который получает на вход отображение (Map)
-    // целочисленных идентификаторов в объекты типа Human и множество целых чисел.
-    // Результат — множество людей, идентификаторы которых содержатся во входном множестве.
-    public List<Human> getHumans(Map<Integer, Human> map, int[] array) {
-        return getHumans(map, array, 0);
-    }
-
     //8.
     // Для отображения из задачи 7 постройте список идентификаторов людей, чей возраст не менее 18 лет.
-    public List<Human> getHumansNotYoung(Map<Integer, Human> map, int[] array) {
-        return getHumans(map, array, 18);
+    public List<Human> getHumansNotYoung(Map<Integer, Human> map, Set<Integer> array) {
+        List<Human> result = new ArrayList<>();
+        for (int value: array) {
+            final Human human = map.get(value);
+            if (human != null && human.getAge() >= 18) {
+                result.add(human);
+            }
+        }
+        return result;
     }
 }
