@@ -30,4 +30,8 @@ public class Group {
     public void setArray(int[] array) {
         this.array = array;
     }
+
+    public int getLength() {
+        return array.length;
+    }
 }

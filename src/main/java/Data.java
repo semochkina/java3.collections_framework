@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 //10. набор групп
 public class Data {
@@ -13,7 +11,6 @@ public class Data {
     //Data data = new Data(“Test data”, new Group(...), new Group(...));
     public Data(String name, Group... groups) {
         this.name = name;
-//        this.groups = groups;  // fixme
         this.groups = new Group[groups.length];
         for (int i = 0; i < groups.length; i++) {
             this.groups[i] = groups[i];
@@ -33,16 +30,14 @@ public class Data {
     }
 
     public void setGroups(Group[] groups) {
-//        this.groups = groups; // fixme
         this.groups = new Group[groups.length];
         for (int i = 0; i < groups.length; i++) {
             this.groups[i] = groups[i];
         }
     }
 
-
     // длина массива
-    public int length() {
+    public int getLength() {
         return groups.length;
     }
 
@@ -63,6 +58,8 @@ public class Data {
     }
 
     static class DataIterator implements Iterator {
+
+        private Data data;
         // сам набор групп в виде массива
         //private Group[] groups;
 
@@ -73,7 +70,7 @@ public class Data {
         // текущий номер в группе
         private int numberInGroup = -1;
 
-                public DataIterator(Data data) {
+        public DataIterator(Data data) {
             this.data = data;
         }
 
@@ -120,4 +117,5 @@ public class Data {
 //            numberInGroup++;
 //            return value;
 //        }
+    }
 }
