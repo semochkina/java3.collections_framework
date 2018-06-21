@@ -48,15 +48,15 @@ public class Data {
 
     //3) Напишите итератор, который для объекта класса Data перебирает все числа во всех его группах.
     // Добавьте в класс Data метод iterator().
-    public Iterator<Integer> iterator0() {
-        List<Integer> collection = new ArrayList<>();
-        for (Group group : getGroups()) {
-            for (int i : group.getArray()) {
-                collection.add(i);
-            }
-        }
-        return collection.iterator();
-    }
+//    public Iterator<Integer> iterator0() {
+//        List<Integer> collection = new ArrayList<>();
+//        for (Group group : getGroups()) {
+//            for (int i : group.getArray()) {
+//                collection.add(i);
+//            }
+//        }
+//        return collection.iterator();
+//    }
 
     public Iterator<Integer> iterator() {
         return new DataIterator(this);
@@ -64,41 +64,60 @@ public class Data {
 
     static class DataIterator implements Iterator {
         // сам набор групп в виде массива
-        private Group[] groups;
+        //private Group[] groups;
 
         // количество чисел во всех группах (при next - уменьшается)
-        private int count;
+        //private int count;
         // текущий номер группы
         private int currNumberGroup = 0;
         // текущий номер в группе
-        private int numberInGroup = 0;
+        private int numberInGroup = -1;
 
-        public DataIterator(Data data) {
-            this.groups = data.getGroups();
-            count = 0;
-            for (Group group : groups) {
-                count += group.getArray().length;
-            }
+                public DataIterator(Data data) {
+            this.data = data;
         }
 
         @Override
         public boolean hasNext() {
-            return count > 0;
+            return data.getGroups().length != 0 && (currNumberGroup < data.getLength() - 1 || numberInGroup < data.getGroups()[currNumberGroup].getLength() - 1);
         }
 
         @Override
         public Object next() {
-            if (!hasNext()) {
-                return null;
-            }
-            while (groups[currNumberGroup].getArray().length <= numberInGroup) {
+            if (data.getGroups()[currNumberGroup].getLength() > numberInGroup + 1) {
+                numberInGroup++;
+                return data.getGroups()[currNumberGroup].getArray()[numberInGroup];
+            } else {
                 currNumberGroup++;
                 numberInGroup = 0;
+                return data.getGroups()[currNumberGroup].getArray()[numberInGroup];
             }
-            count--;
-            int value = groups[currNumberGroup].getArray()[numberInGroup];
-            numberInGroup++;
-            return value;
         }
-    }
+//        public DataIterator(Data data) {
+//            this.groups = data.getGroups();
+//            count = 0;
+//            for (Group group : groups) {
+//                count += group.getArray().length;
+//            }
+//        }
+//
+//        @Override
+//        public boolean hasNext() {
+//            return count > 0;
+//        }
+//
+//        @Override
+//        public Object next() {
+//            if (!hasNext()) {
+//                return null;
+//            }
+//            while (groups[currNumberGroup].getArray().length <= numberInGroup) {
+//                currNumberGroup++;
+//                numberInGroup = 0;
+//            }
+//            count--;
+//            int value = groups[currNumberGroup].getArray()[numberInGroup];
+//            numberInGroup++;
+//            return value;
+//        }
 }
